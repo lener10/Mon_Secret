@@ -1,0 +1,65 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
+using Mon_Secret.Controllers;
+using Mon_Secret.Models;
+
+namespace Mon_Secret.Views.Contacts
+{
+    public partial class ModifierContactForm : Form
+    {
+        private readonly int userId;
+        private readonly int contactId;
+        private readonly ContactController contactController;
+
+        public ModifierContactForm() : this(0, 0)
+        {
+        }
+
+        public ModifierContactForm(int userId, int contactId)
+        {
+            InitializeComponent();
+            this.userId = userId;
+            this.contactId = contactId;
+            contactController = new ContactController();
+            button1.Click += (_, _) => { DialogResult = DialogResult.Cancel; Close(); };
+            btnModifier.Click += btnModifier_Click;
+            ChargerContact();
+        }
+
+        private void ChargerContact()
+        {
+            if (!contactController.VoirContact(contactId, userId, out Contact contact, out string message))
+            {
+                MessageBox.Show(message, "Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                DialogResult = DialogResult.Cancel;
+                Close();
+                return;
+            }
+
+            textModifierNom.Text = contact.Nom;
+            textModifierPrenom.Text = contact.Prenom;
+            textModifierTelephone.Text = contact.Telephone;
+            textModifierEmail.Text = contact.Email;
+            textModifierAdresse.Text = contact.Adresse;
+        }
+
+        private void btnModifier_Click(object? sender, EventArgs e)
+        {
+            bool resultat = contactController.ModifierContact(contactId, userId,
+                textModifierNom.Text, textModifierPrenom.Text, textModifierTelephone.Text,
+                textModifierEmail.Text, textModifierAdresse.Text, out string message);
+            MessageBox.Show(message, resultat ? "Succès" : "Attention", MessageBoxButtons.OK,
+                resultat ? MessageBoxIcon.Information : MessageBoxIcon.Warning);
+            if (resultat)
+            {
+                DialogResult = DialogResult.OK;
+                Close();
+            }
+        }
+    }
+}

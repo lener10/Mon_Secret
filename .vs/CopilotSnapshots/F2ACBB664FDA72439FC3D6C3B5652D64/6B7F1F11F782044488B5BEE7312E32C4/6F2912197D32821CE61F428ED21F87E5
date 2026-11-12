@@ -1,0 +1,133 @@
+﻿using Mon_Secret.Controllers;
+using Mon_Secret.Models;
+using Mon_Secret.Views;
+using Mon_Secret.Views.Auth;
+using Mon_Secret.Views.Contacts;
+using Mon_Secret.Views.Dashboard;
+using Mon_Secret.Views.Secrets;
+using Mon_Secret.Views.Activites;
+using Org.BouncyCastle.Crypto;
+using System;
+using System.Windows.Forms;
+
+namespace Mon_Secret
+{
+    public partial class Accueill : Form
+    {
+        private int userId;
+        public Accueill()
+        {
+            InitializeComponent();
+            AfficherVue(new DashboardControl());
+
+
+        }
+
+        public Accueill(int userId) : this()
+        {
+            this.userId = userId;
+            AfficherVue(new DashboardControl(userId));
+            AuthController authController = new AuthController();
+
+            User user = authController.GetUserById(userId);
+
+            if (user != null)
+            {
+                LabelBonjour.Text = "Bonjour, " + user.Fullname;
+            }
+        }
+
+        private void AfficherVue(UserControl vue)
+        {
+            panelContenu.Controls.Clear();
+
+            vue.Dock = DockStyle.Fill;
+
+            panelContenu.Controls.Add(vue);
+        }
+
+        private void btnAccueil_Click(object sender, EventArgs e)
+        {
+            AfficherVue(new DashboardControl(userId));
+        }
+
+        private void btnSecrets_Click(object sender, EventArgs e)
+        {
+
+            if (userId <= 0)
+            {
+                MessageBox.Show(
+                    "Aucun utilisateur connecté.",
+                    "Accès refusé",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+
+                return;
+            }
+
+            // Demander le PIN
+            using (PinForm pinForm = new PinForm(userId))
+            {
+                if (pinForm.ShowDialog(this) == DialogResult.OK)
+                {
+                    // Accès autorisé
+                    AfficherVue(new SecretControl(userId));
+                }
+            }
+        }
+
+        public void OuvrirSecrets()
+        {
+            AfficherVue(new SecretControl(userId));
+
+            AfficherVue(new ContactControl(userId));
+            AfficherVue(new dgvActivites(userId));
+
+        }
+
+        private void btnActivites_Click(object sender, EventArgs e)
+        {
+            AfficherVue(new dgvActivites(userId));
+        }
+
+        private void btnContacts_Click(object sender, EventArgs e)
+        {
+            AfficherVue(new ContactControl(userId));
+        }
+
+        private void btnFerme_Click(object sender, EventArgs e)
+        {
+            DialogResult resultat = MessageBox.Show(
+               "Voulez-vous vraiment quitter l'application ?",
+               "Confirmation de fermeture",
+               MessageBoxButtons.YesNo,
+               MessageBoxIcon.Warning
+           );
+
+            if (resultat == DialogResult.Yes)
+            {
+                System.Windows.Forms.Application.Exit();
+            }
+        }
+
+        private void btnDeconnexion_Click(object sender, EventArgs e)
+        {
+            DialogResult resultat = MessageBox.Show(
+              "Voulez-vous vraiment vous deconnecter ?",
+              "Confirmation de deconnexion",
+              MessageBoxButtons.YesNo,
+              MessageBoxIcon.Question
+          );
+
+            if (resultat == DialogResult.Yes)
+            {
+                AuthForm loginForm = new AuthForm();
+
+                loginForm.Show();
+
+                this.Hide();
+            }
+        }
+    }
+}

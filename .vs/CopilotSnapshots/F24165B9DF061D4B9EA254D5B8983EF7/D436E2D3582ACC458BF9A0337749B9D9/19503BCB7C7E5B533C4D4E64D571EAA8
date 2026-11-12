@@ -1,0 +1,241 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
+using Mon_Secret.Controllers;
+
+namespace Mon_Secret.Views.Contacts
+{
+    public partial class dgvActivites : UserControl
+    {
+        private readonly int userId;
+        private readonly ActiviteController activiteController;
+        private DataTable activitesTable = null!;
+
+        public dgvActivites() : this(0)
+        {
+        }
+
+        public dgvActivites(int userId)
+        {
+            InitializeComponent();
+
+            this.userId = userId;
+            activiteController = new ActiviteController();
+
+            ConfigurerDataGridView();
+
+            ConfigurerCategories();
+            ConfigurerStatuts();
+
+            txtRecherche.TextChanged += txtRecherche_TextChanged;
+
+            cmbCategorie.SelectedIndexChanged += cmbCategorie_SelectedIndexChanged;
+
+            cmbStatut.SelectedIndexChanged += cmbStatut_SelectedIndexChanged;
+
+            ChargerActivites();
+        }
+
+
+
+        private void ConfigurerDataGridView()
+        {
+            // Apparence générale
+            dataGridView1.BackgroundColor = Color.White;
+            dataGridView1.BorderStyle = BorderStyle.None;
+
+            // En-tête des colonnes
+            dataGridView1.ColumnHeadersDefaultCellStyle.BackColor =
+                Color.MidnightBlue;
+
+            dataGridView1.ColumnHeadersDefaultCellStyle.ForeColor =
+                Color.White;
+
+            dataGridView1.ColumnHeadersDefaultCellStyle.Font =
+                new Font("Segoe UI", 10, FontStyle.Bold);
+
+            // Style des cellules
+            dataGridView1.DefaultCellStyle.Font =
+                new Font("Segoe UI", 9, FontStyle.Regular);
+
+            dataGridView1.DefaultCellStyle.SelectionBackColor =
+                Color.LightSteelBlue;
+
+            dataGridView1.DefaultCellStyle.SelectionForeColor =
+                Color.Black;
+
+            // Comportement
+            dataGridView1.EnableHeadersVisualStyles = false;
+            dataGridView1.RowHeadersVisible = false;
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToDeleteRows = false;
+            dataGridView1.AllowUserToResizeRows = false;
+
+            dataGridView1.ReadOnly = true;
+            dataGridView1.MultiSelect = false;
+
+            dataGridView1.SelectionMode =
+                DataGridViewSelectionMode.FullRowSelect;
+
+            // Dimensions générales
+            dataGridView1.Size = new Size(719, 228);
+
+            dataGridView1.AutoSizeColumnsMode =
+                DataGridViewAutoSizeColumnsMode.None;
+
+            dataGridView1.ColumnHeadersHeight = 40;
+            dataGridView1.RowTemplate.Height = 35;
+
+            // Largeur des colonnes
+            dataGridView1.Columns["colTitre"].Width = 100;
+            dataGridView1.Columns["colDescription"].Width = 135;
+            dataGridView1.Columns["colDateHeure"].Width = 115;
+            dataGridView1.Columns["colCategorie"].Width = 95;
+            dataGridView1.Columns["colStatut"].Width = 85;
+
+            // Boutons d'action
+            ConfigurerBouton("ColVoir", "◉", 50);
+            ConfigurerBouton("ColModifier", "✎", 65);
+            ConfigurerBouton("ColSupprimer", "✖", 65);
+
+            // Association avec les champs de la base de données
+            dataGridView1.Columns["colTitre"].DataPropertyName = "title";
+            dataGridView1.Columns["colDescription"].DataPropertyName = "description";
+            dataGridView1.Columns["colDateHeure"].DataPropertyName = "date_heure";
+            dataGridView1.Columns["colCategorie"].DataPropertyName = "category";
+            dataGridView1.Columns["colStatut"].DataPropertyName = "status";
+            dataGridView1.Columns["colDateHeure"].DefaultCellStyle.Format =
+                "dd/MM/yyyy HH:mm";
+        }
+
+       
+        private void ConfigurerBouton(  string nomColonne, string texte, int largeur)
+        {
+      DataGridViewButtonColumn bouton =
+            (DataGridViewButtonColumn)dataGridView1.Columns[nomColonne];
+
+            bouton.Text = texte;
+    bouton.UseColumnTextForButtonValue = true;
+    bouton.FlatStyle = FlatStyle.Flat;
+    bouton.Width = largeur;
+
+    bouton.DefaultCellStyle.Font =
+        new Font("Segoe UI Symbol", 14, FontStyle.Bold);
+
+    bouton.DefaultCellStyle.Alignment =
+        DataGridViewContentAlignment.MiddleCenter;
+
+    // Couleur des icônes
+    if (nomColonne == "ColVoir")
+        bouton.DefaultCellStyle.ForeColor = Color.DodgerBlue;
+
+    else if (nomColonne == "ColModifier")
+        bouton.DefaultCellStyle.ForeColor = Color.DarkOrange;
+
+    else if (nomColonne == "ColSupprimer")
+        bouton.DefaultCellStyle.ForeColor = Color.Crimson;
+
+    bouton.DefaultCellStyle.SelectionForeColor =
+        bouton.DefaultCellStyle.ForeColor;
+        }
+        private void ConfigurerCategories()
+        {
+            cmbCategorie.Items.Clear();
+
+            cmbCategorie.Items.Add("Toutes les catégories");
+            cmbCategorie.Items.Add("Personnel");
+            cmbCategorie.Items.Add("Études");
+            cmbCategorie.Items.Add("Travail");
+            cmbCategorie.Items.Add("Urgent");
+
+            cmbCategorie.SelectedIndex = 0;
+        }
+
+        private void ConfigurerStatuts()
+        {
+            cmbStatut.Items.Clear();
+
+            cmbStatut.Items.Add("Tous les statuts");
+            cmbStatut.Items.Add("À faire");
+            cmbStatut.Items.Add("En cours");
+            cmbStatut.Items.Add("Terminée");
+
+            cmbStatut.SelectedIndex = 0;
+        }
+
+        private void txtRecherche_TextChanged(object? sender, EventArgs e)
+        {
+            AppliquerFiltres();
+        }
+
+        private void cmbCategorie_SelectedIndexChanged(object? sender, EventArgs e)
+        {
+            AppliquerFiltres();
+        }
+
+        private void cmbStatut_SelectedIndexChanged(object? sender, EventArgs e)
+        {
+            AppliquerFiltres();
+        }
+
+        private void AppliquerFiltres()
+        {
+            if (dataGridView1.DataSource is not DataTable table)
+                return;
+
+            List<string> filtres = new List<string>();
+            string recherche = txtRecherche.Text.Trim().Replace("'", "''");
+
+            if (!string.IsNullOrWhiteSpace(recherche))
+            {
+                filtres.Add(
+                    $"(title LIKE '%{recherche}%' OR description LIKE '%{recherche}%')");
+            }
+
+            if (!string.IsNullOrWhiteSpace(cmbCategorie.Text) &&
+                cmbCategorie.Text != "Toutes les catégories")
+            {
+                string categorie = cmbCategorie.Text.Replace("'", "''");
+                filtres.Add($"category = '{categorie}'");
+            }
+
+            if (!string.IsNullOrWhiteSpace(cmbStatut.Text) &&
+                cmbStatut.Text != "Tous les statuts")
+            {
+                string statut = cmbStatut.Text.Replace("'", "''");
+                filtres.Add($"status = '{statut}'");
+            }
+
+            table.DefaultView.RowFilter = string.Join(" AND ", filtres);
+        }
+
+        private void ChargerActivites()
+        {
+            if (userId <= 0)
+                return;
+
+            try
+            {
+                activitesTable = activiteController.AfficherActivites(userId);
+                dataGridView1.DataSource = activitesTable;
+                AppliquerFiltres();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    ex.Message,
+                    "Erreur",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
+        }
+
+    }
+
+
+}

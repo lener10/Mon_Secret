@@ -1,0 +1,229 @@
+﻿using System;
+using System.Data;
+using Mon_Secret.Models;
+
+namespace Mon_Secret.Controllers
+{
+    internal class ContactController
+    {
+        private readonly ContactModel contactModel;
+
+        public ContactController()
+        {
+            contactModel = new ContactModel();
+        }
+
+        private bool ValiderContact(
+            string? nom,
+            string? prenom,
+            string? telephone,
+            string? email,
+            string? adresse,
+            out string message)
+        {
+            message = "";
+
+            if (string.IsNullOrWhiteSpace(nom) ||
+                string.IsNullOrWhiteSpace(prenom) ||
+                string.IsNullOrWhiteSpace(telephone) ||
+                string.IsNullOrWhiteSpace(email) ||
+                string.IsNullOrWhiteSpace(adresse))
+            {
+                message = "Veuillez remplir tous les champs obligatoires.";
+                return false;
+            }
+
+            if (nom.Trim().Length > 100 || prenom.Trim().Length > 100)
+            {
+                message = "Le nom et le prénom ne doivent pas dépasser 100 caractères.";
+                return false;
+            }
+
+            if (telephone.Trim().Length > 30)
+            {
+                message = "Le téléphone ne doit pas dépasser 30 caractères.";
+                return false;
+            }
+
+            if (email.Trim().Length > 254 || !email.Contains('@'))
+            {
+                message = "L'adresse e-mail est invalide.";
+                return false;
+            }
+
+            if (adresse.Trim().Length > 255)
+            {
+                message = "L'adresse ne doit pas dépasser 255 caractères.";
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool AjouterContact(int userId, string? nom, string? prenom,
+            string? telephone, string? email, string? adresse, out string message)
+        {
+            message = "";
+            try
+            {
+                if (userId <= 0)
+                {
+                    message = "Utilisateur non valide.";
+                    return false;
+                }
+
+                if (!ValiderContact(nom, prenom, telephone, email, adresse, out message))
+                    return false;
+
+                return Enregistrer(new Contact
+                {
+                    UserId = userId,
+                    Nom = nom!.Trim(),
+                    Prenom = prenom!.Trim(),
+                    Telephone = telephone!.Trim(),
+                    Email = email!.Trim(),
+                    Adresse = adresse!.Trim()
+                }, out message, "ajout");
+            }
+            catch (Exception ex)
+            {
+                message = "Erreur lors de l'ajout : " + ex.Message;
+                return false;
+            }
+        }
+
+        public DataTable AfficherContacts(int userId)
+        {
+            if (userId <= 0)
+                return new DataTable();
+
+            try
+            {
+                return contactModel.FindAllByUserId(userId);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erreur lors du chargement des contacts : " + ex.Message);
+            }
+        }
+
+        public bool VoirContact(int contactId, int userId, out Contact contact, out string message)
+        {
+            contact = new Contact();
+            message = "";
+            try
+            {
+                if (contactId <= 0 || userId <= 0)
+                {
+                    message = "Identifiants invalides.";
+                    return false;
+                }
+
+                DataTable table = contactModel.FindContactById(contactId, userId);
+                if (table.Rows.Count == 0)
+                {
+                    message = "Contact introuvable ou accès refusé.";
+                    return false;
+                }
+
+                contact = ConvertirContact(table.Rows[0]);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                message = "Erreur lors de la consultation : " + ex.Message;
+                return false;
+            }
+        }
+
+        public bool ModifierContact(int contactId, int userId, string? nom, string? prenom,
+            string? telephone, string? email, string? adresse, out string message)
+        {
+            message = "";
+            try
+            {
+                if (contactId <= 0 || userId <= 0)
+                {
+                    message = "Identifiants invalides.";
+                    return false;
+                }
+
+                if (!ValiderContact(nom, prenom, telephone, email, adresse, out message))
+                    return false;
+
+                if (contactModel.FindContactById(contactId, userId).Rows.Count == 0)
+                {
+                    message = "Contact introuvable ou accès refusé.";
+                    return false;
+                }
+
+                return Enregistrer(new Contact
+                {
+                    Id = contactId,
+                    UserId = userId,
+                    Nom = nom!.Trim(),
+                    Prenom = prenom!.Trim(),
+                    Telephone = telephone!.Trim(),
+                    Email = email!.Trim(),
+                    Adresse = adresse!.Trim()
+                }, out message, "modification");
+            }
+            catch (Exception ex)
+            {
+                message = "Erreur lors de la modification : " + ex.Message;
+                return false;
+            }
+        }
+
+        public bool SupprimerContact(int contactId, int userId, out string message)
+        {
+            message = "";
+            try
+            {
+                if (contactId <= 0 || userId <= 0)
+                {
+                    message = "Identifiants invalides.";
+                    return false;
+                }
+
+                if (contactModel.FindContactById(contactId, userId).Rows.Count == 0)
+                {
+                    message = "Contact introuvable ou accès refusé.";
+                    return false;
+                }
+
+                bool result = contactModel.DeleteById(contactId);
+                message = result ? "Contact supprimé avec succès." : "Impossible de supprimer le contact.";
+                return result;
+            }
+            catch (Exception ex)
+            {
+                message = "Erreur lors de la suppression : " + ex.Message;
+                return false;
+            }
+        }
+
+        private bool Enregistrer(Contact contact, out string message, string operation)
+        {
+            bool result = operation == "ajout" ? contactModel.Save(contact) : contactModel.Update(contact);
+            message = result
+                ? operation == "ajout" ? "Contact ajouté avec succès." : "Contact modifié avec succès."
+                : operation == "ajout" ? "Impossible d'ajouter le contact." : "Aucune modification effectuée.";
+            return result;
+        }
+
+        private static Contact ConvertirContact(DataRow row)
+        {
+            return new Contact
+            {
+                Id = Convert.ToInt32(row["id"]),
+                UserId = Convert.ToInt32(row["user_id"]),
+                Nom = Convert.ToString(row["nom"]) ?? "",
+                Prenom = Convert.ToString(row["prenom"]) ?? "",
+                Telephone = Convert.ToString(row["telephone"]) ?? "",
+                Email = Convert.ToString(row["email"]) ?? "",
+                Adresse = Convert.ToString(row["adresse"]) ?? ""
+            };
+        }
+    }
+}

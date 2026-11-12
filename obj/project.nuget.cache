@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "dgSpecHash": "FusLXtR6ds4=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\ACER 2025\\Desktop\\C# Graphique\\Mon_Secret\\Mon_Secret.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ACER 2025\\.nuget\\packages\\bcrypt.net-next\\4.2.0\\bcrypt.net-next.4.2.0.nupkg.sha512",
+    "C:\\Users\\ACER 2025\\.nuget\\packages\\bouncycastle.cryptography\\2.6.2\\bouncycastle.cryptography.2.6.2.nupkg.sha512",
+    "C:\\Users\\ACER 2025\\.nuget\\packages\\google.protobuf\\3.35.0\\google.protobuf.3.35.0.nupkg.sha512",
+    "C:\\Users\\ACER 2025\\.nuget\\packages\\k4os.compression.lz4\\1.3.8\\k4os.compression.lz4.1.3.8.nupkg.sha512",
+    "C:\\Users\\ACER 2025\\.nuget\\packages\\k4os.compression.lz4.streams\\1.3.8\\k4os.compression.lz4.streams.1.3.8.nupkg.sha512",
+    "C:\\Users\\ACER 2025\\.nuget\\packages\\k4os.hash.xxhash\\1.0.8\\k4os.hash.xxhash.1.0.8.nupkg.sha512",
+    "C:\\Users\\ACER 2025\\.nuget\\packages\\mysql.data\\26.10.0\\mysql.data.26.10.0.nupkg.sha512",
+    "C:\\Users\\ACER 2025\\.nuget\\packages\\zstdsharp.port\\0.8.8\\zstdsharp.port.0.8.8.nupkg.sha512"
+  ],
+  "logs": []
+}

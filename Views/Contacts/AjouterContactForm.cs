@@ -1,0 +1,50 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
+using Mon_Secret.Controllers;
+
+namespace Mon_Secret.Views.Contacts
+{
+    public partial class AjouterContactForm : Form
+    {
+        private readonly int userId;
+        private readonly ContactController contactController;
+
+        public AjouterContactForm() : this(0)
+        {
+        }
+
+        public AjouterContactForm(int userId)
+        {
+            InitializeComponent();
+            this.userId = userId;
+            contactController = new ContactController();
+            btnAnnuler.Click += (_, _) => { DialogResult = DialogResult.Cancel; Close(); };
+            btnEnregistre.Click += btnEnregistre_Click;
+            textTelephone.KeyPress += textTelephone_KeyPress;
+        }
+
+        private static void textTelephone_KeyPress(object? sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && (e.KeyChar < '0' || e.KeyChar > '9'))
+                e.Handled = true;
+        }
+
+        private void btnEnregistre_Click(object? sender, EventArgs e)
+        {
+            bool resultat = contactController.AjouterContact(userId, textNom.Text, textPrenom.Text,
+                textTelephone.Text, textEmail.Text, textAdresse.Text, out string message);
+            MessageBox.Show(message, resultat ? "Succès" : "Attention", MessageBoxButtons.OK,
+                resultat ? MessageBoxIcon.Information : MessageBoxIcon.Warning);
+            if (resultat)
+            {
+                DialogResult = DialogResult.OK;
+                Close();
+            }
+        }
+    }
+}

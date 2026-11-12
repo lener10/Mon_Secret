@@ -1,0 +1,416 @@
+﻿namespace Mon_Secret.Views.Secrets
+{
+    partial class SecretControl
+    {
+        /// <summary> 
+        /// Variable nécessaire au concepteur.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary> 
+        /// Nettoyage des ressources utilisées.
+        /// </summary>
+        /// <param name="disposing">true si les ressources managées doivent être supprimées ; sinon, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Code généré par le Concepteur de composants
+
+        /// <summary> 
+        /// Méthode requise pour la prise en charge du concepteur - ne modifiez pas 
+        /// le contenu de cette méthode avec l'éditeur de code.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            panelMotsDePasse = new Panel();
+            lblNbMotsDePasse = new Label();
+            label1 = new Label();
+            pictureBox1 = new PictureBox();
+            panelBanques = new Panel();
+            lblNbBanques = new Label();
+            label4 = new Label();
+            pictureBox2 = new PictureBox();
+            panelClesAPI = new Panel();
+            lblNbClesAPI = new Label();
+            label3 = new Label();
+            pictureBox3 = new PictureBox();
+            panelIdentifications = new Panel();
+            lblNbIdentifications = new Label();
+            label2 = new Label();
+            pictureBox4 = new PictureBox();
+            btnAjouterSecret = new Button();
+            dgvSecrets = new DataGridView();
+            colTitre = new DataGridViewTextBoxColumn();
+            colCategorie = new DataGridViewTextBoxColumn();
+            colDescription = new DataGridViewTextBoxColumn();
+            colDateAjout = new DataGridViewTextBoxColumn();
+            ColVoir = new DataGridViewButtonColumn();
+            ColModifier = new DataGridViewButtonColumn();
+            ColSupprimer = new DataGridViewButtonColumn();
+            txtRecherche = new TextBox();
+            cmbCategorie = new ComboBox();
+            panelMotsDePasse.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            panelBanques.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            panelClesAPI.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
+            panelIdentifications.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvSecrets).BeginInit();
+            SuspendLayout();
+            // 
+            // panelMotsDePasse
+            // 
+            panelMotsDePasse.BackgroundImage = Properties.Resources.Captura_de_pantalla_2026_11_10_095709;
+            panelMotsDePasse.Controls.Add(lblNbMotsDePasse);
+            panelMotsDePasse.Controls.Add(label1);
+            panelMotsDePasse.Controls.Add(pictureBox1);
+            panelMotsDePasse.Location = new Point(28, 13);
+            panelMotsDePasse.Name = "panelMotsDePasse";
+            panelMotsDePasse.Size = new Size(142, 74);
+            panelMotsDePasse.TabIndex = 0;
+            // 
+            // lblNbMotsDePasse
+            // 
+            lblNbMotsDePasse.AutoSize = true;
+            lblNbMotsDePasse.BackColor = Color.RoyalBlue;
+            lblNbMotsDePasse.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblNbMotsDePasse.ForeColor = Color.White;
+            lblNbMotsDePasse.Location = new Point(121, 42);
+            lblNbMotsDePasse.Name = "lblNbMotsDePasse";
+            lblNbMotsDePasse.Size = new Size(0, 21);
+            lblNbMotsDePasse.TabIndex = 2;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.BackColor = Color.DodgerBlue;
+            label1.Font = new Font("Segoe UI Black", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(52, 11);
+            label1.Name = "label1";
+            label1.Size = new Size(91, 17);
+            label1.TabIndex = 1;
+            label1.Text = "Mot de passe";
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BackgroundImage = Properties.Resources.Captura_de_pantalla_2026_11_10_0957091;
+            pictureBox1.Image = Properties.Resources.key;
+            pictureBox1.Location = new Point(7, 9);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(40, 35);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 0;
+            pictureBox1.TabStop = false;
+            // 
+            // panelBanques
+            // 
+            panelBanques.BackgroundImage = Properties.Resources.Captura_de_pantalla_2026_11_10_100037;
+            panelBanques.Controls.Add(lblNbBanques);
+            panelBanques.Controls.Add(label4);
+            panelBanques.Controls.Add(pictureBox2);
+            panelBanques.Location = new Point(224, 14);
+            panelBanques.Name = "panelBanques";
+            panelBanques.Size = new Size(142, 74);
+            panelBanques.TabIndex = 0;
+            // 
+            // lblNbBanques
+            // 
+            lblNbBanques.AutoSize = true;
+            lblNbBanques.BackColor = Color.MediumSeaGreen;
+            lblNbBanques.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblNbBanques.ForeColor = Color.White;
+            lblNbBanques.Location = new Point(118, 41);
+            lblNbBanques.Name = "lblNbBanques";
+            lblNbBanques.Size = new Size(0, 21);
+            lblNbBanques.TabIndex = 2;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.BackColor = Color.SeaGreen;
+            label4.Font = new Font("Segoe UI Black", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label4.ForeColor = Color.White;
+            label4.Location = new Point(49, 10);
+            label4.Name = "label4";
+            label4.Size = new Size(93, 17);
+            label4.TabIndex = 1;
+            label4.Text = "Info Bancaire";
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.BackgroundImage = Properties.Resources.Captura_de_pantalla_2026_11_10_1000371;
+            pictureBox2.Image = Properties.Resources.save;
+            pictureBox2.Location = new Point(6, 9);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(40, 35);
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.TabIndex = 0;
+            pictureBox2.TabStop = false;
+            // 
+            // panelClesAPI
+            // 
+            panelClesAPI.BackgroundImage = Properties.Resources.Captura_de_pantalla_2026_11_10_100057;
+            panelClesAPI.Controls.Add(lblNbClesAPI);
+            panelClesAPI.Controls.Add(label3);
+            panelClesAPI.Controls.Add(pictureBox3);
+            panelClesAPI.Location = new Point(410, 13);
+            panelClesAPI.Name = "panelClesAPI";
+            panelClesAPI.Size = new Size(142, 74);
+            panelClesAPI.TabIndex = 0;
+            // 
+            // lblNbClesAPI
+            // 
+            lblNbClesAPI.AutoSize = true;
+            lblNbClesAPI.BackColor = Color.RoyalBlue;
+            lblNbClesAPI.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblNbClesAPI.ForeColor = Color.White;
+            lblNbClesAPI.Location = new Point(120, 42);
+            lblNbClesAPI.Name = "lblNbClesAPI";
+            lblNbClesAPI.Size = new Size(0, 21);
+            lblNbClesAPI.TabIndex = 2;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.BackColor = Color.RoyalBlue;
+            label3.Font = new Font("Segoe UI Black", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.ForeColor = Color.White;
+            label3.Location = new Point(56, 13);
+            label3.Name = "label3";
+            label3.Size = new Size(61, 17);
+            label3.TabIndex = 1;
+            label3.Text = "Clés API";
+            // 
+            // pictureBox3
+            // 
+            pictureBox3.BackgroundImage = Properties.Resources.Captura_de_pantalla_2026_11_10_1000571;
+            pictureBox3.Image = Properties.Resources.application;
+            pictureBox3.Location = new Point(7, 8);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(40, 35);
+            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox3.TabIndex = 0;
+            pictureBox3.TabStop = false;
+            // 
+            // panelIdentifications
+            // 
+            panelIdentifications.BackgroundImage = Properties.Resources.Captura_de_pantalla_2026_11_09_1233271;
+            panelIdentifications.Controls.Add(lblNbIdentifications);
+            panelIdentifications.Controls.Add(label2);
+            panelIdentifications.Controls.Add(pictureBox4);
+            panelIdentifications.Location = new Point(584, 12);
+            panelIdentifications.Name = "panelIdentifications";
+            panelIdentifications.Size = new Size(142, 74);
+            panelIdentifications.TabIndex = 0;
+            // 
+            // lblNbIdentifications
+            // 
+            lblNbIdentifications.AutoSize = true;
+            lblNbIdentifications.BackColor = Color.RoyalBlue;
+            lblNbIdentifications.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblNbIdentifications.ForeColor = Color.White;
+            lblNbIdentifications.Location = new Point(123, 43);
+            lblNbIdentifications.Name = "lblNbIdentifications";
+            lblNbIdentifications.Size = new Size(0, 21);
+            lblNbIdentifications.TabIndex = 2;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.BackColor = Color.DodgerBlue;
+            label2.Font = new Font("Segoe UI Black", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.ForeColor = Color.White;
+            label2.Location = new Point(47, 12);
+            label2.Name = "label2";
+            label2.Size = new Size(103, 17);
+            label2.TabIndex = 1;
+            label2.Text = "Identifications ";
+            // 
+            // pictureBox4
+            // 
+            pictureBox4.BackgroundImage = Properties.Resources.Captura_de_pantalla_2026_11_09_1233272;
+            pictureBox4.Image = Properties.Resources.id_card;
+            pictureBox4.Location = new Point(3, 8);
+            pictureBox4.Name = "pictureBox4";
+            pictureBox4.Size = new Size(40, 35);
+            pictureBox4.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox4.TabIndex = 0;
+            pictureBox4.TabStop = false;
+            // 
+            // btnAjouterSecret
+            // 
+            btnAjouterSecret.BackColor = Color.ForestGreen;
+            btnAjouterSecret.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnAjouterSecret.ForeColor = Color.White;
+            btnAjouterSecret.Image = Properties.Resources.favicon_16x162;
+            btnAjouterSecret.ImageAlign = ContentAlignment.MiddleLeft;
+            btnAjouterSecret.Location = new Point(19, 100);
+            btnAjouterSecret.Name = "btnAjouterSecret";
+            btnAjouterSecret.Size = new Size(143, 35);
+            btnAjouterSecret.TabIndex = 1;
+            btnAjouterSecret.Text = "AjouterSecret";
+            btnAjouterSecret.UseVisualStyleBackColor = false;
+            btnAjouterSecret.Click += btnAjouterSecret_Click;
+            // 
+            // dgvSecrets
+            // 
+            dgvSecrets.AllowUserToAddRows = false;
+            dgvSecrets.AllowUserToDeleteRows = false;
+            dgvSecrets.AllowUserToResizeRows = false;
+            dgvSecrets.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvSecrets.BackgroundColor = Color.White;
+            dgvSecrets.BorderStyle = BorderStyle.None;
+            dgvSecrets.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvSecrets.Columns.AddRange(new DataGridViewColumn[] { colTitre, colCategorie, colDescription, colDateAjout, ColVoir, ColModifier, ColSupprimer });
+            dgvSecrets.EnableHeadersVisualStyles = false;
+            dgvSecrets.Location = new Point(17, 143);
+            dgvSecrets.MultiSelect = false;
+            dgvSecrets.Name = "dgvSecrets";
+            dgvSecrets.ReadOnly = true;
+            dgvSecrets.RowHeadersVisible = false;
+            dgvSecrets.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvSecrets.Size = new Size(709, 230);
+            dgvSecrets.TabIndex = 2;
+            // 
+            // colTitre
+            // 
+            colTitre.DataPropertyName = "title";
+            colTitre.HeaderText = "Titre";
+            colTitre.Name = "colTitre";
+            colTitre.ReadOnly = true;
+            // 
+            // colCategorie
+            // 
+            colCategorie.DataPropertyName = "category";
+            colCategorie.HeaderText = "Categorie";
+            colCategorie.Name = "colCategorie";
+            colCategorie.ReadOnly = true;
+            // 
+            // colDescription
+            // 
+            colDescription.DataPropertyName = "description";
+            colDescription.HeaderText = "Description";
+            colDescription.Name = "colDescription";
+            colDescription.ReadOnly = true;
+            // 
+            // colDateAjout
+            // 
+            colDateAjout.DataPropertyName = "created_at";
+            colDateAjout.HeaderText = "Date d'ajout";
+            colDateAjout.Name = "colDateAjout";
+            colDateAjout.ReadOnly = true;
+            // 
+            // ColVoir
+            // 
+            ColVoir.HeaderText = "Action";
+            ColVoir.Name = "ColVoir";
+            ColVoir.ReadOnly = true;
+            ColVoir.Resizable = DataGridViewTriState.True;
+            ColVoir.SortMode = DataGridViewColumnSortMode.Automatic;
+            ColVoir.UseColumnTextForButtonValue = true;
+            // 
+            // ColModifier
+            // 
+            ColModifier.HeaderText = "Action";
+            ColModifier.Name = "ColModifier";
+            ColModifier.ReadOnly = true;
+            ColModifier.Resizable = DataGridViewTriState.True;
+            ColModifier.SortMode = DataGridViewColumnSortMode.Automatic;
+            ColModifier.UseColumnTextForButtonValue = true;
+            // 
+            // ColSupprimer
+            // 
+            ColSupprimer.HeaderText = "Action";
+            ColSupprimer.Name = "ColSupprimer";
+            ColSupprimer.ReadOnly = true;
+            ColSupprimer.Resizable = DataGridViewTriState.True;
+            ColSupprimer.SortMode = DataGridViewColumnSortMode.Automatic;
+            ColSupprimer.UseColumnTextForButtonValue = true;
+            // 
+            // txtRecherche
+            // 
+            txtRecherche.Location = new Point(566, 103);
+            txtRecherche.Name = "txtRecherche";
+            txtRecherche.PlaceholderText = " ";
+            txtRecherche.Size = new Size(143, 23);
+            txtRecherche.TabIndex = 3;
+            // 
+            // cmbCategorie
+            // 
+            cmbCategorie.FormattingEnabled = true;
+            cmbCategorie.Location = new Point(402, 103);
+            cmbCategorie.Name = "cmbCategorie";
+            cmbCategorie.Size = new Size(121, 23);
+            cmbCategorie.TabIndex = 4;
+            // 
+            // SecretControl
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(cmbCategorie);
+            Controls.Add(txtRecherche);
+            Controls.Add(dgvSecrets);
+            Controls.Add(btnAjouterSecret);
+            Controls.Add(panelIdentifications);
+            Controls.Add(panelClesAPI);
+            Controls.Add(panelBanques);
+            Controls.Add(panelMotsDePasse);
+            Name = "SecretControl";
+            Size = new Size(747, 387);
+            panelMotsDePasse.ResumeLayout(false);
+            panelMotsDePasse.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            panelBanques.ResumeLayout(false);
+            panelBanques.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            panelClesAPI.ResumeLayout(false);
+            panelClesAPI.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
+            panelIdentifications.ResumeLayout(false);
+            panelIdentifications.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvSecrets).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
+        }
+
+        #endregion
+
+        private Panel panelMotsDePasse;
+        private Panel panelBanques;
+        private Panel panelClesAPI;
+        private Panel panelIdentifications;
+        private PictureBox pictureBox1;
+        private PictureBox pictureBox2;
+        private PictureBox pictureBox3;
+        private PictureBox pictureBox4;
+        private Label label1;
+        private Label label2;
+        private Label label3;
+        private Label label4;
+        private Button btnAjouterSecret;
+        private DataGridView dgvSecrets;
+        private Label lblNbMotsDePasse;
+        private Label lblNbBanques;
+        private Label lblNbClesAPI;
+        private Label lblNbIdentifications;
+        private TextBox txtRecherche;
+        private ComboBox cmbCategorie;
+        private DataGridViewTextBoxColumn colTitre;
+        private DataGridViewTextBoxColumn colCategorie;
+        private DataGridViewTextBoxColumn colDescription;
+        private DataGridViewTextBoxColumn colDateAjout;
+        private DataGridViewButtonColumn ColVoir;
+        private DataGridViewButtonColumn ColModifier;
+        private DataGridViewButtonColumn ColSupprimer;
+    }
+}

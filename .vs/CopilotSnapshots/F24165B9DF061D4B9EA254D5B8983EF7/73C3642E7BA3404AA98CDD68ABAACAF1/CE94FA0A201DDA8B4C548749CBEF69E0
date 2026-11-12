@@ -1,0 +1,89 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
+
+namespace Mon_Secret.Views.Contacts
+{
+    public partial class dgvActivites : UserControl
+    {
+        public dgvActivites()
+        {
+            InitializeComponent();
+        }
+
+
+
+        private void ConfigurerDataGridView()
+        {
+            // Apparence générale
+            dgvActivites.BackgroundColor = Color.White;
+            dgvActivites.BorderStyle = BorderStyle.None;
+
+            // En-tête des colonnes
+            dgvActivites.ColumnHeadersDefaultCellStyle.BackColor =
+                Color.MidnightBlue;
+
+            dgvActivites.ColumnHeadersDefaultCellStyle.ForeColor =
+                Color.White;
+
+            dgvActivites.ColumnHeadersDefaultCellStyle.Font =
+                new Font("Segoe UI", 10, FontStyle.Bold);
+
+            // Style des cellules
+            dgvActivites.DefaultCellStyle.Font =
+                new Font("Segoe UI", 9, FontStyle.Regular);
+
+            dgvActivites.DefaultCellStyle.SelectionBackColor =
+                Color.LightSteelBlue;
+
+            dgvActivites.DefaultCellStyle.SelectionForeColor =
+                Color.Black;
+
+            // Comportement
+            dgvActivites.EnableHeadersVisualStyles = false;
+            dgvActivites.RowHeadersVisible = false;
+            dgvActivites.AllowUserToAddRows = false;
+            dgvActivites.AllowUserToDeleteRows = false;
+            dgvActivites.AllowUserToResizeRows = false;
+
+            dgvActivites.ReadOnly = true;
+            dgvActivites.MultiSelect = false;
+
+            dgvActivites.SelectionMode =
+                DataGridViewSelectionMode.FullRowSelect;
+
+            // Dimensions générales
+            dgvActivites.Size = new Size(719, 228);
+
+            dgvActivites.AutoSizeColumnsMode =
+                DataGridViewAutoSizeColumnsMode.None;
+
+            dgvActivites.ColumnHeadersHeight = 40;
+            dgvActivites.RowTemplate.Height = 35;
+
+            // Largeur des colonnes
+            dgvActivites.Columns["colTitre"].Width = 100;
+            dgvActivites.Columns["colDescription"].Width = 135;
+            dgvActivites.Columns["colDateHeure"].Width = 115;
+            dgvActivites.Columns["colCategorie"].Width = 95;
+            dgvActivites.Columns["colStatut"].Width = 85;
+
+            // Boutons d'action
+            ConfigurerBouton("ColVoir", "◉", 50);
+            ConfigurerBouton("ColModifier", "✎", 65);
+            ConfigurerBouton("ColSupprimer", "✖", 65);
+
+            // Association avec les champs de la base de données
+            dgvActivites.Columns["colTitre"].DataPropertyName = "title";
+            dgvActivites.Columns["colDescription"].DataPropertyName = "description";
+            dgvActivites.Columns["colDateHeure"].DataPropertyName = "date_heure";
+            dgvActivites.Columns["colCategorie"].DataPropertyName = "category";
+            dgvActivites.Columns["colStatut"].DataPropertyName = "status";
+        }
+
+    }
+}

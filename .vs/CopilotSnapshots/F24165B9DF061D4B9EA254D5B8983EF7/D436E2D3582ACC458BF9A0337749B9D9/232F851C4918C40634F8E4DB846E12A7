@@ -1,0 +1,33 @@
+﻿using System;
+using System.Data;
+using Mon_Secret.Models;
+
+namespace Mon_Secret.Controllers
+{
+    internal class ActiviteController
+    {
+        private readonly ActiviteModel activiteModel;
+
+        public ActiviteController()
+        {
+            activiteModel = new ActiviteModel();
+        }
+
+        public DataTable AfficherActivites(int userId)
+        {
+            if (userId <= 0)
+                return new DataTable();
+
+            try
+            {
+                return activiteModel.FindAllByUserId(userId);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(
+                    "Erreur lors du chargement des activités : " + ex.Message
+                );
+            }
+        }
+    }
+}

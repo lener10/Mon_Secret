@@ -1,0 +1,18 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
+
+namespace Mon_Secret.Views.Contacts
+{
+    public partial class ContactControl : UserControl
+    {
+        public ContactControl()
+        {
+            InitializeComponent();
+        }
+    }
+}

@@ -1,0 +1,103 @@
+﻿using System.Data;
+using MySql.Data.MySqlClient;
+
+namespace Mon_Secret.Models
+{
+    internal class ActiviteModel : BaseModel<Activite>
+    {
+        public ActiviteModel() : base("activites")
+        {
+            CreateTable();
+        }
+
+        private void CreateTable()
+        {
+            string sql = @"
+                CREATE TABLE IF NOT EXISTS activites (
+                    id INT AUTO_INCREMENT PRIMARY KEY,
+                    user_id INT NOT NULL,
+                    title VARCHAR(100) NOT NULL,
+                    description TEXT NULL,
+                    date_heure DATETIME NOT NULL,
+                    category VARCHAR(50) NOT NULL,
+                    status VARCHAR(30) NOT NULL,
+
+                    CONSTRAINT fk_activite_user
+                    FOREIGN KEY (user_id)
+                    REFERENCES users(id)
+                    ON DELETE CASCADE
+                ) ENGINE=InnoDB;
+            ";
+
+            using (var conn = MySqlConnection())
+            {
+                conn.Open();
+
+                using (var cmd = new MySqlCommand(sql, conn))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public DataTable FindAllByUserId(int userId)
+        {
+            DataTable dt = new DataTable();
+
+            string sql = @"
+                SELECT id, title, description, date_heure, category, status
+                FROM activites
+                WHERE user_id = @userId
+                ORDER BY date_heure DESC, id DESC;
+            ";
+
+            using (var conn = MySqlConnection())
+            {
+                conn.Open();
+
+                using (var cmd = new MySqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@userId", userId);
+
+                    using (var adapter = new MySqlDataAdapter(cmd))
+                    {
+                        adapter.Fill(dt);
+                    }
+                }
+            }
+
+            return dt;
+        }
+
+        public DataTable FindActiviteById(int activiteId, int userId)
+        {
+            DataTable dt = new DataTable();
+
+            string sql = @"
+                SELECT *
+                FROM activites
+                WHERE id = @activiteId
+                AND user_id = @userId
+                LIMIT 1;
+            ";
+
+            using (var conn = MySqlConnection())
+            {
+                conn.Open();
+
+                using (var cmd = new MySqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@activiteId", activiteId);
+                    cmd.Parameters.AddWithValue("@userId", userId);
+
+                    using (var adapter = new MySqlDataAdapter(cmd))
+                    {
+                        adapter.Fill(dt);
+                    }
+                }
+            }
+
+            return dt;
+        }
+    }
+}

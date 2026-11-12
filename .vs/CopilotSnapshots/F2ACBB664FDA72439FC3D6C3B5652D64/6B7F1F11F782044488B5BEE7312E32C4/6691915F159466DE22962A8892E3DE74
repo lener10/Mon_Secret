@@ -1,0 +1,414 @@
+﻿using Mon_Secret.Controllers;
+using Mon_Secret.Models;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Text;
+using System.Windows.Forms;
+
+
+
+namespace Mon_Secret.Views.Secrets
+{
+    public partial class SecretControl : System.Windows.Forms.UserControl
+    {
+        private int userId;
+        private SecretController secretController = null!;
+        private DataTable secretsTable = null!;
+        public SecretControl(int userId)
+        {
+            InitializeComponent();
+
+            ArrondirPanel(panelMotsDePasse, 8);
+            ArrondirPanel(panelBanques, 8);
+            ArrondirPanel(panelIdentifications, 8);
+            ArrondirPanel(panelClesAPI, 8);
+
+
+            this.userId = userId;
+            secretController = new SecretController();
+
+            // Configuration du tableau
+            ConfigurerDataGridView();
+
+            // Préparer les catégories
+            ConfigurerCategories();
+
+            // Événements de recherche et de filtrage
+            txtRecherche.TextChanged += txtRecherche_TextChanged;
+            cmbCategorie.SelectedIndexChanged += cmbCategorie_SelectedIndexChanged;
+            // Événement des boutons du tableau
+
+            dgvSecrets.CellContentClick += dgvSecrets_CellContentClick;
+            // Charger les secrets
+            ChargerSecrets();
+        }
+
+
+
+
+
+        private void ArrondirPanel(Panel panel, int rayon)
+        {
+            GraphicsPath path = new GraphicsPath();
+
+            int diametre = rayon * 2;
+
+            path.AddArc(0, 0, diametre, diametre, 180, 90);
+            path.AddArc(panel.Width - diametre, 0,
+                diametre, diametre, 270, 90);
+
+            path.AddArc(panel.Width - diametre,
+                panel.Height - diametre,
+                diametre, diametre, 0, 90);
+
+            path.AddArc(0, panel.Height - diametre,
+                diametre, diametre, 90, 90);
+
+            path.CloseFigure();
+
+            panel.Region = new Region(path);
+        }
+
+        private void ConfigurerDataGridView()
+        {
+            // Apparence générale
+            dgvSecrets.BackgroundColor = Color.White;
+            dgvSecrets.BorderStyle = BorderStyle.None;
+
+            // En-tête des colonnes
+            dgvSecrets.ColumnHeadersDefaultCellStyle.BackColor = Color.MidnightBlue;
+            dgvSecrets.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvSecrets.ColumnHeadersDefaultCellStyle.Font =
+                new Font("Segoe UI", 10, FontStyle.Bold);
+
+            // Style des cellules
+            dgvSecrets.DefaultCellStyle.Font =
+                new Font("Segoe UI", 9, FontStyle.Regular);
+
+            dgvSecrets.DefaultCellStyle.SelectionBackColor = Color.LightSteelBlue;
+            dgvSecrets.DefaultCellStyle.SelectionForeColor = Color.Black;
+
+            // Comportement
+            dgvSecrets.EnableHeadersVisualStyles = false;
+            dgvSecrets.RowHeadersVisible = false;
+            dgvSecrets.AllowUserToAddRows = false;
+            dgvSecrets.AllowUserToDeleteRows = false;
+            dgvSecrets.AllowUserToResizeRows = false;
+
+            dgvSecrets.ReadOnly = true;
+            dgvSecrets.MultiSelect = false;
+            dgvSecrets.SelectionMode =
+                DataGridViewSelectionMode.FullRowSelect;
+
+            // Dimensions générales
+            dgvSecrets.Size = new Size(709, 230);
+
+            dgvSecrets.AutoSizeColumnsMode =
+                DataGridViewAutoSizeColumnsMode.None;
+
+            dgvSecrets.ColumnHeadersHeight = 40;
+            dgvSecrets.RowTemplate.Height = 35;
+
+            // Largeur des colonnes
+            dgvSecrets.Columns["colTitre"].Width = 105;
+            dgvSecrets.Columns["colCategorie"].Width = 105;
+            dgvSecrets.Columns["colDescription"].Width = 140;
+            dgvSecrets.Columns["colDateAjout"].Width = 105;
+
+            // Boutons d'action
+            ConfigurerBouton("ColVoir", "◉", 55);
+            ConfigurerBouton("ColModifier", "✎", 75);
+            ConfigurerBouton("ColSupprimer", "✖", 85);
+
+            // Associer les colonnes aux champs de la base de données
+            dgvSecrets.Columns["colTitre"].DataPropertyName = "title";
+            dgvSecrets.Columns["colCategorie"].DataPropertyName = "category";
+            dgvSecrets.Columns["colDescription"].DataPropertyName = "description";
+            dgvSecrets.Columns["colDateAjout"].DataPropertyName = "created_at";
+        }
+
+        private void ConfigurerBouton(string nomColonne, string texte, int largeur)
+        {
+            DataGridViewButtonColumn bouton =
+                (DataGridViewButtonColumn)dgvSecrets.Columns[nomColonne];
+
+            bouton.Text = texte;
+            bouton.UseColumnTextForButtonValue = true;
+            bouton.FlatStyle = FlatStyle.Flat;
+            bouton.Width = largeur;
+
+
+
+
+            bouton.DefaultCellStyle.Font =
+                new Font("Segoe UI Symbol", 14, FontStyle.Bold);
+
+            bouton.DefaultCellStyle.Alignment =
+                DataGridViewContentAlignment.MiddleCenter;
+
+            // Couleur de chaque icône
+            if (nomColonne == "ColVoir")
+                bouton.DefaultCellStyle.ForeColor = Color.DodgerBlue;
+
+            else if (nomColonne == "ColModifier")
+                bouton.DefaultCellStyle.ForeColor = Color.DarkOrange;
+
+            else if (nomColonne == "ColSupprimer")
+                bouton.DefaultCellStyle.ForeColor = Color.Crimson;
+
+            // Couleur au survol et à la sélection
+            bouton.DefaultCellStyle.SelectionForeColor =                
+                bouton.DefaultCellStyle.ForeColor;
+        }
+
+
+        private void ConfigurerCategories()
+        {
+            cmbCategorie.Items.Clear();
+
+            cmbCategorie.Items.Add("Toutes les catégories");
+            cmbCategorie.Items.Add("Mots de passe");
+            cmbCategorie.Items.Add("Informations bancaires");
+            cmbCategorie.Items.Add("Clés API");
+            cmbCategorie.Items.Add("Identifications");
+
+            cmbCategorie.SelectedIndex = 0;
+        }
+
+        private void ChargerSecrets()
+        {
+            try
+            {
+                secretsTable = secretController.AfficherSecrets(userId);
+
+                // Afficher les données dans le tableau
+                dgvSecrets.DataSource = secretsTable;
+
+                // Formater les dates
+                dgvSecrets.Columns["colDateAjout"]
+                    .DefaultCellStyle.Format = "dd/MM/yyyy HH:mm";
+
+                // Mettre à jour les statistiques
+                ActualiserStatistiques();
+
+                // Appliquer les filtres
+                AppliquerFiltres();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    ex.Message,
+                    "Erreur",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
+        }
+
+        // =========================================
+        // STATISTIQUES DES SECRETS
+        // =========================================
+
+        private void ActualiserStatistiques()
+        {
+            int motsDePasse = 0;
+            int banques = 0;
+            int clesAPI = 0;
+            int identifications = 0;
+
+            foreach (DataRow ligne in secretsTable.Rows)
+            {
+                string categorie = Convert.ToString(ligne["category"]) ?? string.Empty;
+
+                if (categorie == "Mots de passe")
+                    motsDePasse++;
+
+                else if (categorie == "Informations bancaires")
+                    banques++;
+
+                else if (categorie == "Clés API")
+                    clesAPI++;
+
+                else if (categorie == "Identifications")
+                    identifications++;
+            }
+
+            lblNbMotsDePasse.Text = motsDePasse.ToString();
+            lblNbBanques.Text = banques.ToString();
+            lblNbClesAPI.Text = clesAPI.ToString();
+            lblNbIdentifications.Text = identifications.ToString();
+        }
+
+        // =========================================
+        // RECHERCHE
+        // =========================================
+
+        private void txtRecherche_TextChanged(object sender, EventArgs e)
+        {
+            AppliquerFiltres();
+        }
+
+        // =========================================
+        // FILTRAGE PAR CATÉGORIE
+        // =========================================
+
+        private void cmbCategorie_SelectedIndexChanged(
+            object sender,
+            EventArgs e)
+        {
+            AppliquerFiltres();
+        }
+
+        // =========================================
+        // APPLIQUER LES FILTRES
+        // =========================================
+
+        private void AppliquerFiltres()
+        {
+            if (secretsTable == null)
+                return;
+
+            string recherche = txtRecherche.Text.Trim();
+            string categorie = cmbCategorie.Text;
+
+            string filtreRecherche = "";
+            string filtreCategorie = "";
+
+            if (!string.IsNullOrWhiteSpace(recherche))
+            {
+                string texte = recherche.Replace("'", "''");
+
+                filtreRecherche =
+                    $"(title LIKE '%{texte}%' " +
+                    $"OR description LIKE '%{texte}%')";
+            }
+
+            if (!string.IsNullOrWhiteSpace(categorie) &&
+                categorie != "Toutes les catégories")
+            {
+                string texteCategorie = categorie.Replace("'", "''");
+
+                filtreCategorie =
+                    $"category = '{texteCategorie}'";
+            }
+
+            string filtreFinal = "";
+
+            if (filtreRecherche != "")
+                filtreFinal = filtreRecherche;
+
+            if (filtreCategorie != "")
+            {
+                if (filtreFinal != "")
+                    filtreFinal += " AND ";
+
+                filtreFinal += filtreCategorie;
+            }
+
+            secretsTable.DefaultView.RowFilter = filtreFinal;
+        }
+
+        private void btnAjouterSecret_Click(object sender, EventArgs e)
+        {
+            using (AjouterSecretForm form = new AjouterSecretForm(userId))
+            {
+                if (form.ShowDialog(this) == DialogResult.OK)
+                {
+                    ChargerSecrets();
+                }
+            }
+        }
+
+        private void dgvSecrets_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
+                return;
+
+            string colonne = dgvSecrets.Columns[e.ColumnIndex].Name;
+
+            if (colonne == "ColModifier")
+            {
+                DataGridViewRow ligne = dgvSecrets.Rows[e.RowIndex];
+
+                DataRowView data = (DataRowView)ligne.DataBoundItem;
+
+                int secretId = Convert.ToInt32(data["id"]);
+
+                using (ModifierSecretForm form =
+                    new ModifierSecretForm(userId, secretId))
+                {
+                    if (form.ShowDialog(this) == DialogResult.OK)
+                    {
+                        ChargerSecrets();
+                    }
+                }
+            }
+            if (colonne == "ColSupprimer")
+            {
+                DialogResult confirmation = MessageBox.Show(
+                    "Voulez-vous vraiment supprimer ce secret ?",
+                    "Confirmation de suppression",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning
+                );
+
+                if (confirmation == DialogResult.Yes)
+                {
+                    DataGridViewRow ligne = dgvSecrets.Rows[e.RowIndex];
+
+                    DataRowView data = (DataRowView)ligne.DataBoundItem;
+
+                    int secretId = Convert.ToInt32(data["id"]);
+
+                    bool resultat = secretController.SupprimerSecret(
+                        secretId,
+                        userId,
+                        out string message
+                    );
+
+                    if (resultat)
+                    {
+                        MessageBox.Show(
+                            message,
+                            "Succès",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information
+                        );
+
+                        ChargerSecrets();
+                    }
+                    else
+                    {
+                        MessageBox.Show(
+                            message,
+                            "Attention",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning
+                        );
+                    }
+                }
+            }
+            if (colonne == "ColVoir")
+            {
+                DataGridViewRow ligne = dgvSecrets.Rows[e.RowIndex];
+
+                DataRowView data = (DataRowView)ligne.DataBoundItem;
+
+                int secretId = Convert.ToInt32(data["id"]);
+
+                using (DetailsSecretForm form =
+                    new DetailsSecretForm(userId, secretId))
+                {
+                    form.ShowDialog(this);
+                }
+            }
+        }
+
+
+    }
+}

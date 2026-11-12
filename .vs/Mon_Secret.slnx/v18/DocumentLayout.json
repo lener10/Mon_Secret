@@ -1,0 +1,145 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\ACER 2025\\Desktop\\C# Graphique\\Mon_Secret\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{61EA5AA7-FBAF-CD24-8862-38B3553C18C7}|Mon_Secret.csproj|c:\\users\\acer 2025\\desktop\\c# graphique\\mon_secret\\mon_secret.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{61EA5AA7-FBAF-CD24-8862-38B3553C18C7}|Mon_Secret.csproj|solutionrelative:mon_secret.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{61EA5AA7-FBAF-CD24-8862-38B3553C18C7}|Mon_Secret.csproj|c:\\users\\acer 2025\\desktop\\c# graphique\\mon_secret\\views\\dashboard\\dashboardcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61EA5AA7-FBAF-CD24-8862-38B3553C18C7}|Mon_Secret.csproj|solutionrelative:views\\dashboard\\dashboardcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{61EA5AA7-FBAF-CD24-8862-38B3553C18C7}|Mon_Secret.csproj|c:\\users\\acer 2025\\desktop\\c# graphique\\mon_secret\\views\\accueill.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{61EA5AA7-FBAF-CD24-8862-38B3553C18C7}|Mon_Secret.csproj|solutionrelative:views\\accueill.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{61EA5AA7-FBAF-CD24-8862-38B3553C18C7}|Mon_Secret.csproj|C:\\Users\\ACER 2025\\Desktop\\C# Graphique\\Mon_Secret\\views\\auth\\resetpasswordform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{61EA5AA7-FBAF-CD24-8862-38B3553C18C7}|Mon_Secret.csproj|solutionrelative:views\\auth\\resetpasswordform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{61EA5AA7-FBAF-CD24-8862-38B3553C18C7}|Mon_Secret.csproj|C:\\Users\\ACER 2025\\Desktop\\C# Graphique\\Mon_Secret\\views\\auth\\authform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{61EA5AA7-FBAF-CD24-8862-38B3553C18C7}|Mon_Secret.csproj|solutionrelative:views\\auth\\authform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{61EA5AA7-FBAF-CD24-8862-38B3553C18C7}|Mon_Secret.csproj|C:\\Users\\ACER 2025\\Desktop\\C# Graphique\\Mon_Secret\\views\\secrets\\modifiersecretform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{61EA5AA7-FBAF-CD24-8862-38B3553C18C7}|Mon_Secret.csproj|solutionrelative:views\\secrets\\modifiersecretform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{61EA5AA7-FBAF-CD24-8862-38B3553C18C7}|Mon_Secret.csproj|C:\\Users\\ACER 2025\\Desktop\\C# Graphique\\Mon_Secret\\views\\secrets\\secretcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{61EA5AA7-FBAF-CD24-8862-38B3553C18C7}|Mon_Secret.csproj|solutionrelative:views\\secrets\\secretcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Mon_Secret",
+              "DocumentMoniker": "C:\\Users\\ACER 2025\\Desktop\\C# Graphique\\Mon_Secret\\Mon_Secret.csproj",
+              "RelativeDocumentMoniker": "Mon_Secret.csproj",
+              "ToolTip": "C:\\Users\\ACER 2025\\Desktop\\C# Graphique\\Mon_Secret\\Mon_Secret.csproj",
+              "RelativeToolTip": "Mon_Secret.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-11-12T16:25:35.021Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DashboardControl.cs",
+              "DocumentMoniker": "C:\\Users\\ACER 2025\\Desktop\\C# Graphique\\Mon_Secret\\Views\\Dashboard\\DashboardControl.cs",
+              "RelativeDocumentMoniker": "Views\\Dashboard\\DashboardControl.cs",
+              "ToolTip": "C:\\Users\\ACER 2025\\Desktop\\C# Graphique\\Mon_Secret\\Views\\Dashboard\\DashboardControl.cs",
+              "RelativeToolTip": "Views\\Dashboard\\DashboardControl.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-12T15:44:51.105Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ResetPasswordForm.cs [Conception]",
+              "DocumentMoniker": "C:\\Users\\ACER 2025\\Desktop\\C# Graphique\\Mon_Secret\\Views\\Auth\\ResetPasswordForm.cs",
+              "RelativeDocumentMoniker": "Views\\Auth\\ResetPasswordForm.cs",
+              "ToolTip": "C:\\Users\\ACER 2025\\Desktop\\C# Graphique\\Mon_Secret\\Views\\Auth\\ResetPasswordForm.cs [Conception]",
+              "RelativeToolTip": "Views\\Auth\\ResetPasswordForm.cs [Conception]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-12T15:00:56.334Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Accueill.cs [Conception]",
+              "DocumentMoniker": "C:\\Users\\ACER 2025\\Desktop\\C# Graphique\\Mon_Secret\\Views\\Accueill.cs",
+              "RelativeDocumentMoniker": "Views\\Accueill.cs",
+              "ToolTip": "C:\\Users\\ACER 2025\\Desktop\\C# Graphique\\Mon_Secret\\Views\\Accueill.cs [Conception]",
+              "RelativeToolTip": "Views\\Accueill.cs [Conception]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-12T14:46:16.352Z",
+              "EditorCaption": " [Conception]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AuthForm.cs [Conception]",
+              "DocumentMoniker": "C:\\Users\\ACER 2025\\Desktop\\C# Graphique\\Mon_Secret\\Views\\Auth\\AuthForm.cs",
+              "RelativeDocumentMoniker": "Views\\Auth\\AuthForm.cs",
+              "ToolTip": "C:\\Users\\ACER 2025\\Desktop\\C# Graphique\\Mon_Secret\\Views\\Auth\\AuthForm.cs [Conception]",
+              "RelativeToolTip": "Views\\Auth\\AuthForm.cs [Conception]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-12T14:44:56.607Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "SecretControl.cs [Conception]",
+              "DocumentMoniker": "C:\\Users\\ACER 2025\\Desktop\\C# Graphique\\Mon_Secret\\Views\\Secrets\\SecretControl.cs",
+              "RelativeDocumentMoniker": "Views\\Secrets\\SecretControl.cs",
+              "ToolTip": "C:\\Users\\ACER 2025\\Desktop\\C# Graphique\\Mon_Secret\\Views\\Secrets\\SecretControl.cs [Conception]",
+              "RelativeToolTip": "Views\\Secrets\\SecretControl.cs [Conception]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-11T01:42:37.77Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ModifierSecretForm.cs [Conception]",
+              "DocumentMoniker": "C:\\Users\\ACER 2025\\Desktop\\C# Graphique\\Mon_Secret\\Views\\Secrets\\ModifierSecretForm.cs",
+              "RelativeDocumentMoniker": "Views\\Secrets\\ModifierSecretForm.cs",
+              "ToolTip": "C:\\Users\\ACER 2025\\Desktop\\C# Graphique\\Mon_Secret\\Views\\Secrets\\ModifierSecretForm.cs [Conception]",
+              "RelativeToolTip": "Views\\Secrets\\ModifierSecretForm.cs [Conception]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-10T20:33:57.967Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
